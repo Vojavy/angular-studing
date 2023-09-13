@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+p {
+    font: 20px sans-serif;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: coral;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-grow: 1;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: end;
+    height: 10%;
+    background-color: dimgray;
+    position: absolute;
+    bottom: 0;
+    width: 98vw;
+}
+
+button {
+    background-color: greenyellow;
+    border-radius: 4px;
+    padding: 10px;
+    font-weight: 800;
+}

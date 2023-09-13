@@ -1,0 +1,8 @@
+<div *ngFor="let module of modules">
+    <h1>{{module.id}}. &nbsp; {{module.name}}</h1>
+    <p>{{module.intro}}
+        <a [title]="module.name" [routerLink]="['dynamicС', module.shortName]" routerLinkActive="router-link-active"
+            role="button">Try it!</a>
+    </p>
+
+</div>

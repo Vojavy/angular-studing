@@ -3,6 +3,14 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "browser-preview",
+      "request": "launch",
+      "name": "Browser Preview: Launch",
+      "webRoot": "${workspaceFolder}",
+      "url": "http://localhost:4200/"
+    },
+
+    {
       "name": "ng serve",
       "type": "chrome",
       "request": "launch",

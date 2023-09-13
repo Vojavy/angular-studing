@@ -1,0 +1,27 @@
+<p>chiffre-de-vigenere works!</p>
+<div *ngIf="isEncrypting">
+    <h2>Caesar encryption</h2>
+    <p>
+        <label for="formText">Enter text to encrypt: </label>
+        <input [(ngModel)]="text" (input)="encryptText()" />
+
+        Enter number of steps:
+        <input [(ngModel)]="keyword" type="text" (input)="encryptText()" />
+    </p>
+</div>
+<div *ngIf="!isEncrypting">
+    <h2>Caesar decryption</h2>
+    <p>
+        <label for="formText">Enter text to decrypt: </label>
+        <input [(ngModel)]="text" (input)="decryptText()" />
+
+        Enter number of steps:
+        <input [(ngModel)]="keyword" type="text" (input)="decryptText()" />
+    </p>
+</div>
+<p>OUTPUT</p>
+<p>Original form: {{inputText}}</p>
+<p>Redacted: "{{resultText}}" with keyword: "{{keyword}}"</p>
+
+<button type="button" (click)="toggleEncryption()" [style.background-color]="isEncrypting ? '' : 'cyan'">Toggle Encryption</button>
+<button type="button" (click)="handleText()">Do magic</button>

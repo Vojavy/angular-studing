@@ -1,0 +1,27 @@
+<div *ngIf="isEncrypting">
+    <h2>Caesar encryption</h2>
+    <p>
+        <label for="formText">Enter text to encrypt: </label>
+        <input [(ngModel)]="text" (input)="encryptText()" />
+
+        Enter number of steps:
+        <input [(ngModel)]="shift" type="number" (input)="encryptText()" />
+    </p>
+</div>
+<div *ngIf="!isEncrypting">
+    <h2>Caesar decryption</h2>
+    <p>
+        <label for="formText">Enter text to decrypt: </label>
+        <input [(ngModel)]="text" (input)="decryptText()" />
+
+        Enter number of steps:
+        <input [(ngModel)]="shift" type="number" (input)="decryptText()" />
+    </p>
+</div>
+<p>OUTPUT</p>
+<p>Original form: {{text}}</p>
+<p>Redacted: "{{newText}}" with shift {{shift}}</p>
+
+<div>
+    <button type="button" (click)="toggleEncryption()" [style.background-color]="isEncrypting ? '' : 'cyan'">Toggle Encryption</button>
+</div>
