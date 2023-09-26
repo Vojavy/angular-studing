@@ -1,5 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { InputsMetaService } from './../inputs-meta.service';
+import { InputType, InputsMetaService } from './../inputs-meta.service';
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
@@ -10,18 +10,18 @@ import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@
 export class TextInputComponent implements OnChanges{
   @Input() inputName:string = "";
   @Input() label: string = "";
-  @Input() isNecessarily: boolean = false;
-  @Input() type: string = "text";
+  @Input() isRequired: boolean = false;
+  @Input() type: InputType = InputType.TEXT;
 
   validTypes: string[] = ['text', 'email', 'number'];
   formControl = new FormControl(this.inputName);
 
   constructor(inputMeta : InputsMetaService){
-    inputMeta.setMetaData(this.label, this.inputName, this.isNecessarily);
+    inputMeta.setMetaData(this.label, this.inputName, this.isRequired, this.type);
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['type'] && !this.validTypes.includes(this.type)) 
-      this.type = "text";
+      this.type = InputType.TEXT;
   }
 
   get formControler(){

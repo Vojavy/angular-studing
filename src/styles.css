@@ -20,7 +20,6 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    align-content: end;
     height: 10%;
     background-color: dimgray;
     position: absolute;
@@ -29,8 +28,13 @@ footer {
 }
 
 button {
-    background-color: greenyellow;
+    background-color: cadetblue;
     border-radius: 4px;
     padding: 10px;
     font-weight: 800;
+    margin: 10px;
+}
+
+button :hover{
+    background-color: rebeccapurple;
 }

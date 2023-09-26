@@ -1,3 +1,10 @@
-<p>forms-generator works!</p>
-<app-text-input [inputName]="'Name'" [label]="'Enter Name: '" [isNecessarily]="true"></app-text-input>
-<app-text-input [inputName]="'Surname'" [label]="'Enter Surname: '" [isNecessarily]="true"></app-text-input>
+<p>json-parser works!</p>
+<app-drop-down-input [label]="'Choose Json: '" [inputName]="'Json choose'" [isRequired]="true" [items]="jsonsList"
+    (itemSelected)="handleItemSelected($event)"></app-drop-down-input>
+
+<div *ngIf="parsedJson">
+    <div *ngFor="let item of parsedJson">
+        <ng-container *ngComponentOutlet="formModules; injector: componentInjector"></ng-container>
+        <p>{{ item.key }}: {{ item.value }} (Type: {{ item.type }})</p>
+    </div>
+</div>

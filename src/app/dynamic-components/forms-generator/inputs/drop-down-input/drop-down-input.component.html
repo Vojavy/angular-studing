@@ -1,0 +1,4 @@
+<label for="{{inputName}}">{{label}}</label>
+<select [(ngModel)]="selectedOption" (change)="onSelect()" [formControl]="formControl">
+  <option *ngFor="let item of items" [ngValue]="item">{{item.id}}. {{ item.name }}</option>
+</select>

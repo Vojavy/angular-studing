@@ -1,30 +1,30 @@
-import { Injectable, Type } from '@angular/core';
+import { Injectable, InjectionToken, Type } from '@angular/core';
 
+export enum InputType {
+  TEXT = 'text',
+  NUMBER = 'number',
+  OBJECT = 'object',
+  MAIL = 'mail'
+}
+
+export const INJECTABLE_META_TOKEN = new InjectionToken<any>('injectableMetaToken');
 @Injectable({
   providedIn: 'root'
 })
 export class InputsMetaService {
-  private _label?: string;
-  private _isNecessarily?: boolean;
-  private _fieldName?: string;
+  private _metaData: Map<string, { label: string, isRequired: boolean, inputType: InputType }> = new Map();
 
-  setMetaData(fieldName: string, label: string, isNecessarily: boolean) {
-    this._fieldName = fieldName;
-    this._label = label;
-    this._isNecessarily = isNecessarily;
+  constructor() { }
+
+  hasMeta(inputName: string): boolean {
+    return this._metaData.has(inputName);
   }
 
-  get label(): string {
-    return this._label || "";
+  getMeta(inputName: string): { label: string, isRequired: boolean, inputType: InputType } | undefined {
+    return this._metaData.get(inputName);
   }
 
-  get isNecessarily(): boolean {
-    return this._isNecessarily || false; // Вернет false, если _isNecessarily равно null или undefined
-  }
-
-  get fieldName(): string {
-    return this._fieldName || "";
+  setMetaData(inputName: string, label: string, isRequired: boolean, inputType: InputType): void {
+    this._metaData.set(inputName, { label, isRequired, inputType });
   }
 }
-
-

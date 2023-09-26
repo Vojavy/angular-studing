@@ -1,35 +1,75 @@
 import { FormsGeneratorService } from './forms-generator.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output, Type } from '@angular/core';
 import { Module } from '../Module';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { InputType, InputsMetaService } from './inputs/inputs-meta.service';
+
+interface DataItem {
+  name: string;
+  id: number;
+}
 
 @Component({
   selector: 'app-forms-generator',
   templateUrl: './forms-generator.component.html',
   styleUrls: ['./forms-generator.component.css']
 })
-export class FormsGeneratorComponent extends Module implements OnInit{
-  generatedGroup = new FormGroup('');
-  jsonList = new Array<any>;
+export class FormsGeneratorComponent extends Module implements OnInit {
+  formModules: Type<any> | null = null;
+  componentInjector: Injector = Injector.create({
+    providers: [{ provide: 'form', useValue: null }]
+  });
 
-  constructor(private formsGeneratorServise: FormsGeneratorService){
-    super("Forms generator", "FG", "Example of generating forms from json", FormsGeneratorComponent);
+  parsedJson: any;
+  generatedGroup = new FormGroup('');
+  jsonsList = new Array<any>;
+  nextId = 1;
+  private selectedJson: any;
+  private inputsMetaService = new InputsMetaService ;
+
+  constructor(private formsGeneratorServise: FormsGeneratorService) {
+    super("Parse json", "PJ", "Parser of jsons", FormsGeneratorComponent);
   }
-  
-  ngOnInit(){
+
+  ngOnInit() {
     //здесь создается list view из количества json 
-    this.jsonList = this.formsGeneratorServise.getJsonsListFromServer();
-    this.jsonList.forEach(element => {
-     //this.addToJSONListView();//решить передачу имени
+    const files = this.formsGeneratorServise.getJsonsListFromServer();
+    files.forEach((element) => {
+      if (element.hasOwnProperty('name') && element.hasOwnProperty('file')) {
+        this.addToJSONDropDown(element.name, element.file);
+      }
     });
   }
 
-  generate(){
-    //this.formsGeneratorServise.parseJson();//доделать парсинг 
+
+  addToJSONDropDown(name: string, json: any) {
+    // Добавление элемента в list с уникальным id
+    const id = this.nextId++;
+    this.jsonsList.push({ id, name, json });
   }
 
-  addToJSONListView(name: string, id:number){
-    //доделать обработку и добавление в list
+  handleItemSelected(item: DataItem) {
+    // Найти объект в массиве jsonList по имени
+    this.selectedJson = this.jsonsList.find(json => json.id === item.id);
+
+
+    if (this.selectedJson) {
+      // Если объект был найден, передаем его в parseJson для парсинга
+      this.parsedJson = this.formsGeneratorServise.parseJson(this.selectedJson.json);
+      // this.parsedJson.forEach(element => {
+      //   switch (element.type){
+      //     case InputType.TEXT:
+      //       this.formGroup.addControl('text',this.formsGeneratorServise.createTextInputForm(element.key, element.value, true, this.inputsMetaService));
+      //   }
+      // });
+    } else {
+      // Если объект не был найден, this.parsedJson в null или другое значение по умолчанию
+      this.parsedJson = null;
+    }
   }
 
+
+  onSubmit(){
+
+  }
 }

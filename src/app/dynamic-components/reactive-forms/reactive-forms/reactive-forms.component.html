@@ -1,0 +1,59 @@
+<div style="display: flex; flex-direction: column; align-content: center; align-items: center;">
+    <p>reactive-forms works!</p>
+    <h1> Register or Login </h1>
+    <span>
+        <button type="button" (click)="windowLoginShow()">Login</button>
+        <button type="button" (click)="windowRegisterShow()">Register</button>
+    </span>
+
+    <div *ngIf="isShowLoginMenu">
+        <form [formGroup]="loginForm" (ngSubmit)="login()"
+            style="display: flex; flex-direction: column; align-content: center; align-items: center;">
+            <label for="login-input">Login: </label>
+            <input id="login-input" type="text" formControlName="login">
+
+            <label for="password-input">Password: </label>
+            <input id="password-input" type="password" formControlName="password">
+            <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+        </form>
+    </div>
+    <div *ngIf="isShowRegisterMenu">
+        <form [formGroup]="registerForm" (ngSubmit)="register()"
+            style="display: flex; flex-direction: column; align-content: center; align-items: center;">
+
+            <h2>Main Data</h2>
+            <label for="login-input">Login: </label>
+            <input id="login-input" type="text" formControlName="login">
+
+            <label for="password-input">Password: </label>
+            <input id="password-input" type="password" formControlName="password">
+
+            <label for="name-input">Name: </label>
+            <input id="name-input" type="text" formControlName="name">
+
+            <label for="surname-input">Surname: </label>
+            <input id="surname-input" type="text" formControlName="surname">
+
+            <div formGroupName="adress"
+                style="display: flex; flex-direction: column; align-content: center; align-items: center;">
+                <h2>Adress</h2>
+
+                <label for="city">City: </label>
+                <input id="city" type="text" formControlName="city">
+
+                <label for="street">Street: </label>
+                <input id="street" type="text" formControlName="street">
+
+                <label for="building">City: </label>
+                <input id="building" type="number" formControlName="building">
+            </div>
+            <button type="submit" [disabled]="!registerForm.valid">Submit</button>
+        </form>
+    </div>
+    <div>
+        <p>{{message}}</p>
+    </div>
+    <div *ngFor="let acs of acdb">
+        <p>{{acs.toString()}}</p>
+    </div>
+</div>

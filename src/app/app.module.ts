@@ -17,7 +17,8 @@ import { TextInputComponent } from './dynamic-components/forms-generator/inputs/
 import { ListboxInputComponent } from './dynamic-components/forms-generator/inputs/listbox-input/listbox-input.component';
 import { CheckBoxInputComponent } from './dynamic-components/forms-generator/inputs/check-box-input/check-box-input.component';
 import { FormsGeneratorService } from './dynamic-components/forms-generator/forms-generator.service';
-
+import { DropDownInputComponent } from './dynamic-components/forms-generator/inputs/drop-down-input/drop-down-input.component';
+import { ReactiveFormsComponent } from './dynamic-components/reactive-forms/reactive-forms/reactive-forms.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { FormsGeneratorService } from './dynamic-components/forms-generator/form
     FormsGeneratorComponent,
     TextInputComponent,
     ListboxInputComponent,
-    CheckBoxInputComponent
+    CheckBoxInputComponent,
+    DropDownInputComponent,
+    ReactiveFormsComponent
   ],
   imports: [
     FormsModule,

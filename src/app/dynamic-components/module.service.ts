@@ -4,16 +4,19 @@ import { ChiffreDeVigenereComponent } from './chiffre-de-vigenere/chiffre-de-vig
 import { Module } from './Module';
 import { FormsGeneratorComponent } from './forms-generator/forms-generator.component';
 import { FormsGeneratorService } from './forms-generator/forms-generator.service';
+import { ReactiveFormsComponent } from './reactive-forms/reactive-forms/reactive-forms.component';
+import { AccountManagmentService } from './reactive-forms/reactive-forms/account-managment.service';
+import { FormBuilder } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModuleService {
   private _modules: Module[] = [
-    new CaesarCodeComponent(), // Create an instance of CaesarCodeComponent
+    new CaesarCodeComponent(), 
     new ChiffreDeVigenereComponent(),
-    new ChiffreDeVigenereComponent(),  // Create an instance of ChiffreDeVigenereComponent
-    new FormsGeneratorComponent(new FormsGeneratorService)
+    new FormsGeneratorComponent(new FormsGeneratorService),
+    new ReactiveFormsComponent(new AccountManagmentService, new FormBuilder)
   ];
   constructor() { };
   
